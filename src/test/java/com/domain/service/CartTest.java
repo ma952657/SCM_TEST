@@ -59,4 +59,23 @@ public class CartTest {
         assertEquals(cart.calculateFinalPrice(), 370.00,0.001);
 
     }
+
+    @Test
+    public void testCalculateWithoutPromotion()  {
+        List<String> order = new CopyOnWriteArrayList<String>(Arrays.asList("A", "B","C","A", "B","A", "B","A", "B","A", "B"));
+        Cart cart = new Cart(inventory);
+        cart.add(order);
+        assertEquals(cart.calculateNoFilterPrice(), 420.00,0.001);
+    }
+
+    @Test
+    public void testEmptyCart()  {
+        List<String> order = new CopyOnWriteArrayList<String>(Arrays.asList("A", "B","C","A", "B","A", "B","A", "B","A", "B"));
+        Cart cart = new Cart(inventory);
+        cart.add(order);
+        cart.empty();
+        assertEquals(cart.calculateNoFilterPrice(), 0.00,0.00);
+        assertEquals(cart.calculateFinalPrice(), 0.00,0.00);
+    }
+
 }
